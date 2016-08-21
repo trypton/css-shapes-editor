@@ -16,7 +16,7 @@
 //
 // Editor for CSS Shapes in the browser.
 //
-// build: 2015-05-21
+// build: 2016-08-22
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         define(factory);
@@ -24,7 +24,6 @@
         root.CSSShapesEditor = factory();
     }
 }(this, function () {
-
 /**
  * almond 0.2.6 Copyright (c) 2011-2012, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -828,7 +827,7 @@ define("third-party/almond/almond", function(){});
 /*global define */
 
 define('CSSUtils',[],function(){
-    
+    "use strict";
 
     var unitConverters = {
         'px' : function(x) { return x; },
@@ -1186,13 +1185,13 @@ define('CSSUtils',[],function(){
 /*global define, eve */
 
 define('Editor',['eve', 'CSSUtils', 'snap'], function(eve, CSSUtils, Snap){
-    
+    "use strict";
 
     var REFERENCE_BOXES = ['margin-box','border-box','padding-box','content-box'];
 
     function Editor(target, value, options){
 
-        if (!target || !(target instanceof HTMLElement)){
+        if (!target || !(target instanceof HTMLElement || target instanceof window.top.HTMLElement)){
             throw new TypeError('Target expected as HTMLElement object, but was: ' + typeof target);
         }
 
@@ -8158,7 +8157,7 @@ define('Editor',['eve', 'CSSUtils', 'snap'], function(eve, CSSUtils, Snap){
 /*global define */
 
 define('ToolBar',['lodash', 'snap'], function(_, Snap){
-    
+    "use strict";
 
     var _defaults = {
         toolSize: 24
@@ -9475,7 +9474,7 @@ define('ToolBar',['lodash', 'snap'], function(_, Snap){
 /*global define */
 
 define('PolygonEditor',['Editor', 'CSSUtils', 'ToolBar', 'lodash', 'snap', 'snap.freeTransform', 'snap.plugins'], function(Editor, CSSUtils, ToolBar, _, Snap, freeTransform){
-    
+    "use strict";
 
     var _defaults = {
         path: {
@@ -9842,7 +9841,7 @@ define('PolygonEditor',['Editor', 'CSSUtils', 'ToolBar', 'lodash', 'snap', 'snap
     */
 
     PolygonEditor.prototype.inferShapeFromElement = function(element) {
-        if (!(element instanceof HTMLElement)){
+        if (!(element instanceof HTMLElement || element instanceof window.top.HTMLElement)){
             throw new TypeError('inferShapeFromElement() \n Expected HTMLElement, got: ' + typeof element + ' ' + element);
         }
 
@@ -10243,7 +10242,7 @@ define('PolygonEditor',['Editor', 'CSSUtils', 'ToolBar', 'lodash', 'snap', 'snap
 /*global define */
 
 define('CircleEditor',['Editor','CSSUtils', 'snap', 'lodash'], function(Editor, CSSUtils, Snap, _){
-    
+    "use strict";
 
     var _defaults = {
         path: {
@@ -10568,7 +10567,7 @@ define('CircleEditor',['Editor','CSSUtils', 'snap', 'lodash'], function(Editor, 
 /*global define */
 
 define('EllipseEditor',['Editor','CSSUtils', 'snap', 'lodash'], function(Editor, CSSUtils, Snap, _){
-    
+    "use strict";
 
     var _defaults = {
         path: {
@@ -10915,7 +10914,7 @@ define('EllipseEditor',['Editor','CSSUtils', 'snap', 'lodash'], function(Editor,
 
 define('CSSShapesEditor',['PolygonEditor', 'CircleEditor', 'EllipseEditor', 'lodash'], function(PolygonEditor, CircleEditor, EllipseEditor, _){
 
-    
+    'use strict';
 
     function CSSShapesEditor(target, value, options){
 
@@ -10995,7 +10994,7 @@ define('CSSShapesEditor',['PolygonEditor', 'CircleEditor', 'EllipseEditor', 'lod
             return new CSSShapesEditor(target, value, options);
         }
 
-        if (!(target instanceof HTMLElement)){
+        if (!(target instanceof HTMLElement || target instanceof window.top.HTMLElement)){
             throw new TypeError('Target is not instance of HTMLElement');
         }
 
@@ -11042,9 +11041,10 @@ require.config({
 });
 
 define('main', ['CSSShapesEditor'], function(editor){
-    
+    'use strict';
     return editor;
 });
+
     //The modules for your project will be inlined above
     //this snippet. Ask almond to synchronously require the
     //module value for 'main' here and return it as the

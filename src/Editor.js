@@ -22,7 +22,7 @@ define(['eve', 'CSSUtils', 'snap'], function(eve, CSSUtils, Snap){
 
     function Editor(target, value, options){
 
-        if (!target || !(target instanceof HTMLElement)){
+        if (!target || !(target instanceof HTMLElement || target instanceof window.top.HTMLElement)){
             throw new TypeError('Target expected as HTMLElement object, but was: ' + typeof target);
         }
 

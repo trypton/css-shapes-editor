@@ -97,7 +97,7 @@ define(['PolygonEditor', 'CircleEditor', 'EllipseEditor', 'lodash'], function(Po
             return new CSSShapesEditor(target, value, options);
         }
 
-        if (!(target instanceof HTMLElement)){
+        if (!(target instanceof HTMLElement || target instanceof window.top.HTMLElement)){
             throw new TypeError('Target is not instance of HTMLElement');
         }
 

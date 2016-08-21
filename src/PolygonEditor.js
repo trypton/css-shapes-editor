@@ -383,7 +383,7 @@ define(['Editor', 'CSSUtils', 'ToolBar', 'lodash', 'snap', 'snap.freeTransform',
     */
 
     PolygonEditor.prototype.inferShapeFromElement = function(element) {
-        if (!(element instanceof HTMLElement)){
+        if (!(element instanceof HTMLElement || element instanceof window.top.HTMLElement)){
             throw new TypeError('inferShapeFromElement() \n Expected HTMLElement, got: ' + typeof element + ' ' + element);
         }
 
